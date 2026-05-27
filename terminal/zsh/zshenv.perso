@@ -1,0 +1,18 @@
+# ─── .zshenv.perso — Variables d'environnement spécifiques à la machine perso ─
+
+# ─── NVM ──────────────────────────────────────────────────────────────────────
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+
+# ─── Yarn ─────────────────────────────────────────────────────────────────────
+export PATH="$HOME/.yarn/bin:$PATH"
+
+# ─── Flutter ──────────────────────────────────────────────────────────────────
+export PATH="$HOME/development/flutter/bin:$PATH"
+
+# ─── Android Studio ───────────────────────────────────────────────────────────
+export JAVA_HOME="/Application/Android Studio.app/Contents/jre/Contents/Home"
+
+# ─── Angular CLI (GLSR) ───────────────────────────────────────────────────────
+export PATH="$HOME/node_modules/@angular/cli/bin:$PATH"

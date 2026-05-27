@@ -1,0 +1,32 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+*~
+
+# Logs & cache
+*.log
+*.cache
+
+# Env
+.env.local
+.env.*.local
+
+# PHP
+/vendor/
+composer.phar
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log

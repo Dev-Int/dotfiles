@@ -1,0 +1,7 @@
+# ─── .zsh_aliases.perso — Aliases spécifiques à la machine perso ─────────────
+
+# ─── GLSR (side project) ──────────────────────────────────────────────────────
+alias pglsr="ssh-add ~/.ssh/id_ed25519 && cd /home/www/glsr && make start php_sh"
+
+# ─── Marketplace (side project) ───────────────────────────────────────────────
+alias pmarket="ssh-add ~/.ssh/id_ed25519 && cd /home/www/marketplace && make start php_sh"

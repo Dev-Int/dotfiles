@@ -1,0 +1,44 @@
+[global_config]
+[keybindings]
+  edit_tab_title = <Primary><Alt>b
+[profiles]
+  [[default]]
+    background_color = "#002b36"
+    font = Ubuntu Mono 10
+    foreground_color = "#839496"
+    scrollback_lines = 5000
+    scrollback_infinite = True
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 1920:32
+      maximised = False
+      fullscreen = False
+      size = 1920, 499
+      title = /bin/bash
+      last_active_term = 5ccf6ba5-70d9-4460-b6ab-3542f36c500d
+      last_active_window = True
+    [[[child1]]]
+      type = HPaned
+      parent = child0
+      order = 0
+      position = 958
+      ratio = 0.5002610966057441
+    [[[terminal2]]]
+      type = Terminal
+      parent = child1
+      order = 0
+      profile = default
+      uuid = 5ccf6ba5-70d9-4460-b6ab-3542f36c500d
+    [[[terminal3]]]
+      type = Terminal
+      parent = child1
+      order = 1
+      profile = default
+      uuid = 036cf817-dcb2-4167-891a-715f1ac7effc
+[plugins]

@@ -1,0 +1,57 @@
+# ─── .zsh_aliases — Aliases communs (perso + pro) ────────────────────────────
+
+# ─── Git ──────────────────────────────────────────────────────────────────────
+alias gs='git status'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias glog='git log --oneline --graph --decorate --all'
+alias gwt='git worktree'
+
+# ─── Symfony / PHP ────────────────────────────────────────────────────────────
+alias sf='php bin/console'
+alias sfcc='php bin/console cache:clear'
+alias sfd='php bin/console debug:router'
+alias comp='composer'
+alias composer='/usr/local/bin/composer'
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+alias dc='docker compose'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcl='docker compose logs -f'
+alias dockinfo='docker info | grep "Root Dir"'
+
+# ─── Make ─────────────────────────────────────────────────────────────────────
+alias m='make'
+
+# ─── Système ──────────────────────────────────────────────────────────────────
+alias ll='ls -alFh --color=auto'
+alias la='ls -A'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -sh'
+
+# ─── Ubuntu update (apt + snap + nettoyage snap) ──────────────────────────────
+_remove_old_snaps() {
+  LANG=C snap list --all 2>/dev/null | awk '/disabled/{print $1, $3}' | \
+    while read -r snapname revision; do
+      sudo snap remove "$snapname" --revision="$revision"
+    done
+}
+alias ubuntu_update='sudo apt autoremove && sudo apt update && sudo apt dist-upgrade -y \
+  && sudo apt autoremove -y && sudo apt autoclean \
+  && sudo snap refresh && _remove_old_snaps'
+
+# ─── Utilitaires ──────────────────────────────────────────────────────────────
+# Vérifie un checksum sha256 : sha256 <hash_attendu> <fichier>
+sha256() {
+  printf '%s %s\n' "$1" "$2" | sha256sum --check
+}
+
+# ─── Dotfiles ─────────────────────────────────────────────────────────────────
+alias dotfiles='cd ~/.dotfiles'
+alias dotcap='~/.dotfiles/scripts/capture.sh'

@@ -1,0 +1,15 @@
+# Ne pas versionner les backups générés par install.sh
+*.backup.*
+
+# Fichier dconf peut contenir des infos sensibles selon config
+# Décommenter si tu préfères ne pas le versionner :
+# gnome/dconf-settings.ini
+
+# Secrets éventuels
+*.secret
+.env
+
+# Profil Zen Browser complet (trop volumineux + données perso)
+apps/zen-browser/*.sqlite
+apps/zen-browser/sessionstore*
+apps/zen-browser/storage/

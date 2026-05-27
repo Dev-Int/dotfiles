@@ -1,0 +1,5 @@
+system-monitor-next@paradoxxx.zero.gmail.com
+ding@rastersoft.com
+tiling-assistant@ubuntu.com
+ubuntu-appindicators@ubuntu.com
+ubuntu-dock@ubuntu.com

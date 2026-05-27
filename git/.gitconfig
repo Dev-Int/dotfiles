@@ -1,0 +1,10 @@
+[user]
+	email = devint.creation@gmail.com
+	name = Dev-Int
+[core]
+	autocrlf = input
+	excludesfile = /home/laurent/.gitignore
+[init]
+    defaultBranch = main
+[credential]
+    helper = store --file ~/.iad-credentials

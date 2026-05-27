@@ -1,0 +1,30 @@
+# Paquets apt — liste curative (principaux uniquement, sans dépendances)
+# Les dépendances sont installées automatiquement par apt
+
+# ─── Terminal & shell ─────────────────────────────────────────────────────────
+terminator
+zsh
+vim
+
+# ─── Outils système ───────────────────────────────────────────────────────────
+curl
+wget
+git
+git-lfs
+jq
+make
+tree
+htop
+unzip
+
+# ─── Fonts ────────────────────────────────────────────────────────────────────
+fonts-powerline
+
+# ─── GNOME ────────────────────────────────────────────────────────────────────
+gnome-tweaks
+gnome-shell-extension-manager
+dconf-cli
+
+# ─── Dev ──────────────────────────────────────────────────────────────────────
+# Docker installé via module dédié (scripts/modules/docker.sh)
+# PHP géré via Docker — pas d'installation locale nécessaire

@@ -1,0 +1,16 @@
+bare
+core18
+core22
+core24
+deezer-unofficial-player
+firmware-updater
+gnome-3-28-1804
+gnome-42-2204
+gnome-46-2404
+gtk-common-themes
+mesa-2404
+snap-store
+snapd
+snapd-desktop-integration
+teams-for-linux
+thunderbird

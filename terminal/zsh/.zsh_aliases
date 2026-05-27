@@ -1,0 +1,12 @@
+# ─── Système ──────────────────────────────────────────────────────────────────
+alias ll='ls -alFh --color=auto'
+alias la='ls -A'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -sh'
+
+# ─── Dotfiles ─────────────────────────────────────────────────────────────────
+alias dotfiles='cd ~/.dotfiles'
+alias dotcap='~/.dotfiles/scripts/capture.sh'
