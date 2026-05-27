@@ -48,7 +48,6 @@ AVAILABLE_MODULES=(
   "gnome"              # Extensions + paramètres GNOME
   "fonts"              # PowerlineSymbols + Ubuntu Mono
   "docker"             # Docker Engine via repo officiel
-  "php"                # Outils PHP/Symfony (composer, symfony CLI)
   "slack"              # Slack via .deb officiel
   "zen-browser"        # Zen Browser via .deb GitHub release
   "jetbrains-toolbox"  # JetBrains Toolbox dans /opt/ + autostart

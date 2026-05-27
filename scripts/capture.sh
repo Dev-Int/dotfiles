@@ -69,8 +69,12 @@ capture_gnome() {
     && log_ok "dconf-interface.ini"
 
   log_info "Capture liste extensions GNOME actives..."
-  gnome-extensions list --enabled > "$dest/extensions.txt" 2>/dev/null \
-    && log_ok "extensions.txt mis à jour." \
+  # Filtre les extensions préinstallées avec Ubuntu (non disponibles sur extensions.gnome.org)
+  local ubuntu_builtins="ding@rastersoft.com|tiling-assistant@ubuntu.com|ubuntu-appindicators@ubuntu.com|ubuntu-dock@ubuntu.com|ubuntu-systemmonitor@ubuntu.com"
+  gnome-extensions list --enabled 2>/dev/null \
+    | grep -vE "$ubuntu_builtins" \
+    > "$dest/extensions.txt" \
+    && log_ok "extensions.txt mis à jour (extensions Ubuntu filtrées)." \
     || log_warn "gnome-extensions non disponible."
 }
 

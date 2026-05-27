@@ -1,23 +1,25 @@
 #!/usr/bin/env bash
 # Module : gnome
-# Installe les extensions GNOME et restaure la config dconf (dock, etc.)
+# Installe les extensions GNOME et restaure la config dconf ciblée
 
 set -euo pipefail
 
 GNOME_DIR="$DOTFILES_DIR/gnome"
-DCONF_FILE="$GNOME_DIR/dconf-settings.ini"
-EXTENSIONS_LIST="$GNOME_DIR/extensions.txt"
+
+# ─── Dépendances extensions ───────────────────────────────────────────────────
+log_info "Installation des dépendances pour les extensions..."
+sudo apt-get install -y \
+  gir1.2-gtop-2.0 \
+  gir1.2-nm-1.0 \
+  gir1.2-clutter-1.0
+log_ok "Dépendances installées."
 
 # ─── gnome-extensions-cli ─────────────────────────────────────────────────────
-# Outil pip qui permet d'installer des extensions sans navigateur
 install_gext() {
   if ! command -v gnome-extensions-cli &>/dev/null; then
     log_info "Installation de gnome-extensions-cli..."
-    # Vérif pipx ou pip
     if command -v pipx &>/dev/null; then
       pipx install gnome-extensions-cli
-    elif command -v pip3 &>/dev/null; then
-      pip3 install --user gnome-extensions-cli
     else
       sudo apt-get install -y python3-pip
       pip3 install --user gnome-extensions-cli
@@ -28,8 +30,8 @@ install_gext() {
 
 # ─── Extensions ───────────────────────────────────────────────────────────────
 install_extensions() {
-  if [ ! -f "$EXTENSIONS_LIST" ]; then
-    log_warn "Pas de liste d'extensions : $EXTENSIONS_LIST"
+  if [ ! -f "$GNOME_DIR/extensions.txt" ]; then
+    log_warn "Pas de liste d'extensions : $GNOME_DIR/extensions.txt"
     return
   fi
 
@@ -38,30 +40,39 @@ install_extensions() {
   log_info "Installation des extensions GNOME..."
   while IFS= read -r line; do
     [[ "$line" =~ ^#|^$ ]] && continue
-    # Format : uuid|extension-id (ex: system-monitor-next@paradoxxx.zero.gmail.com)
-    ext_uuid="$line"
-    log_info "Extension : $ext_uuid"
-    gnome-extensions-cli install "$ext_uuid" \
-      && log_ok "Extension '$ext_uuid' installée." \
-      || log_warn "Échec pour '$ext_uuid' (peut-être déjà installée)."
-  done < "$EXTENSIONS_LIST"
+    if gnome-extensions-cli install "$line" 2>&1 | grep -q "Cannot find"; then
+      log_warn "Extension introuvable sur extensions.gnome.org : '$line'"
+    else
+      log_ok "Extension '$line' installée."
+    fi
+  done < "$GNOME_DIR/extensions.txt"
 }
 
-# ─── dconf (dock + paramètres GNOME) ─────────────────────────────────────────
+# ─── dconf ciblé ──────────────────────────────────────────────────────────────
 restore_dconf() {
-  if [ ! -f "$DCONF_FILE" ]; then
-    log_warn "Pas de dump dconf : $DCONF_FILE"
-    log_warn "Lance './scripts/capture.sh gnome' pour capturer ta config actuelle."
-    return
-  fi
-
   if ! command -v dconf &>/dev/null; then
     sudo apt-get install -y dconf-cli
   fi
 
-  log_info "Restauration dconf..."
-  dconf load / < "$DCONF_FILE"
-  log_ok "Config dconf restaurée."
+  local files=(
+    "dconf-dock.ini:/org/gnome/shell/extensions/dash-to-dock/"
+    "dconf-shell.ini:/org/gnome/shell/"
+    "dconf-keybindings.ini:/org/gnome/settings-daemon/plugins/media-keys/"
+    "dconf-interface.ini:/org/gnome/desktop/interface/"
+  )
+
+  for entry in "${files[@]}"; do
+    local file="${entry%%:*}"
+    local path="${entry##*:}"
+    local src="$GNOME_DIR/$file"
+
+    if [ -f "$src" ] && [ -s "$src" ]; then
+      dconf load "$path" < "$src"
+      log_ok "dconf restauré : $path"
+    else
+      log_warn "Fichier absent ou vide, skip : $src"
+    fi
+  done
 }
 
 install_extensions
