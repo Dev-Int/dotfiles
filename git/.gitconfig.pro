@@ -1,0 +1,31 @@
+[user]
+	name = LaurentQ56
+	email = laurent.quetier@iadinternational.com
+
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	editor = vim
+
+[pull]
+	rebase = false
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	lg = log --oneline --graph --decorate --all
+	wt = worktree
+
+[color]
+	ui = auto
+
+[init]
+	defaultBranch = main
+
+[merge]
+	conflictstyle = diff3

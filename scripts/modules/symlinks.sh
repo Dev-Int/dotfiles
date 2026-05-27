@@ -16,8 +16,8 @@ SYMLINKS=(
   "terminal/zsh/.zshenv.perso|$HOME/.zshenv.perso"
   "terminal/zsh/.zshenv.pro|$HOME/.zshenv.pro"
   "terminal/terminator/config|$HOME/.config/terminator/config"
-  "git/.gitconfig|$HOME/.gitconfig"
-  "git/.gitignore_global|$HOME/.gitignore_global"
+  "git/.gitconfig.$PROFILE|$HOME/.gitconfig"
+  "git/.gitignore_global|$HOME/.gitignore"
   "vim/.vimrc|$HOME/.vimrc"
 )
 

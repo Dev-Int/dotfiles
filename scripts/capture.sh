@@ -80,8 +80,12 @@ capture_gnome() {
 
 capture_git() {
   log_info "Capture git..."
-  cp "$HOME/.gitconfig"        "$DOTFILES_DIR/git/.gitconfig"        2>/dev/null && log_ok ".gitconfig"
-  cp "$HOME/.gitignore_global" "$DOTFILES_DIR/git/.gitignore_global" 2>/dev/null && log_ok ".gitignore_global" || true
+  local profile="${MACHINE_PROFILE:-perso}"
+  cp "$HOME/.gitconfig" "$DOTFILES_DIR/git/.gitconfig.$profile" 2>/dev/null \
+    && log_ok ".gitconfig.$profile" \
+    || log_warn ".gitconfig introuvable"
+  cp "$HOME/.gitignore_global" "$DOTFILES_DIR/git/.gitignore_global" 2>/dev/null \
+    && log_ok ".gitignore_global" || true
 }
 
 capture_vim() {
